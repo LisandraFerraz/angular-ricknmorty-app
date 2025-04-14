@@ -16,7 +16,12 @@ export class CharactersListComponent {
   }
 
   listCharacters() {
-    this.contentService.listAllCharacters().subscribe({
+    let data = {
+      name: 'rick',
+      page: 1,
+    };
+
+    this.contentService.listAllCharacters(data).subscribe({
       next: (res: any) => {
         console.log(res);
       },
