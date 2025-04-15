@@ -1,0 +1,20 @@
+<app-modal-template
+  [isSearch]="false"
+  (onClose)="closeModal()"
+  [title]="modalData.title"
+>
+  <div class="characters_previews">
+    <h4>Personagens nesse episódio</h4>
+    <div>
+      <app-horizontal-scroller>
+        @for(char of charList; track char.id){
+        <img
+          (click)="goToCharPage(char.id)"
+          [src]="char.image"
+          [alt]="char.name"
+        />
+        }
+      </app-horizontal-scroller>
+    </div>
+  </div>
+</app-modal-template>

@@ -1,0 +1,15 @@
+<div class="card h-100" style="width: 18rem">
+  <div class="card-body">
+    <h5 class="card-title">{{ episode.name }}</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">
+      {{ getEpisode(episode.episode) }}
+    </h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary">
+      Exibido em: {{ episode.air_date }}
+    </h6>
+
+    <!-- data-bs-toggle="modal"
+    data-bs-target="#exampleModal" -->
+    <button (click)="openModal(episode)" class="card-link">Detalhes</button>
+  </div>
+</div>

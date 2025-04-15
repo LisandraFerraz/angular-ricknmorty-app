@@ -1,0 +1,22 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+
+  img {
+    width: 200px;
+    border-radius: 100%;
+  }
+
+  div > .profile-details {
+    font-size: 1.2rem;
+
+    > div {
+      align-items: center;
+    }
+    i {
+      font-size: 1.5rem;
+    }
+  }
+}

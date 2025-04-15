@@ -9,9 +9,20 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ModalTemplateComponent {
   @Input() isSearch: boolean = false;
+  @Input() title: string = '';
+
   @Output() onSearch: EventEmitter<void> = new EventEmitter();
+  @Output() onClose: EventEmitter<void> = new EventEmitter();
+
+  ngOnInit(): void {
+    console.log(this.title);
+  }
 
   submitSearch(): void {
     this.onSearch.emit();
+  }
+
+  closeModal() {
+    this.onClose.emit();
   }
 }

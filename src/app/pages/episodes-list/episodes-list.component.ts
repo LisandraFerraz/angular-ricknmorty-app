@@ -52,5 +52,7 @@ export class EpisodesListComponent {
     });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

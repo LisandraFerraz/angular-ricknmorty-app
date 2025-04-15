@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   Character,
   CharacterGenders,
@@ -18,6 +19,8 @@ import {
   styleUrl: './character-card.component.scss',
 })
 export class CharacterCardComponent {
+  constructor(private route: Router) {}
+
   @Input() data: Character = new Character();
 
   ngOnInit(): void {}
@@ -31,5 +34,9 @@ export class CharacterCardComponent {
 
   filterSpecies(species: string) {
     return filterCharSpecies(species);
+  }
+
+  goToCharPage(charId: number) {
+    this.route.navigate([`/character/${charId}`]);
   }
 }

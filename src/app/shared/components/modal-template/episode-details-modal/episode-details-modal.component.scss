@@ -1,0 +1,14 @@
+.characters_previews {
+  overflow: hidden;
+
+  img {
+    border-radius: 100px;
+    width: 120px;
+    transition: ease-out 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 60%;
+    }
+  }
+}

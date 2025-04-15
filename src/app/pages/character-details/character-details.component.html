@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="profile">
+    <img [src]="charData.image" [alt]="charData.name" />
+    <div>
+      <h2>{{ charData.name }}</h2>
+      <div class="profile-details d-flex flex-row gap-4">
+        <div class="d-flex gap-2">
+          <i [class]="filterGender(charData.gender)?.icon"></i>
+          <span>{{ filterGender(charData.gender)?.label }}</span>
+        </div>
+        <div class="d-flex gap-2">
+          <i [class]="filterStatus(charData.status).icon"></i>
+          <span>{{ filterStatus(charData.status).label }}</span>
+        </div>
+        <div class="d-flex gap-2">
+          <i [class]="filterSpecies(charData.species).icon"></i>
+          <span>{{ filterSpecies(charData.species).label }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="episodes-grid row no-padding-row gap-2">
+    @if(!episodesData){
+    <h4 class="my-4">Não existem episódios com esse personagem.</h4>
+    } @else {
+
+    <h4 class="my-4">Episódios</h4>
+    @for(ep of episodesData; track ep.id){
+    <div class="col-auto">
+      <app-episodes-card [episode]="ep" />
+    </div>
+    } }
+  </div>
+</div>

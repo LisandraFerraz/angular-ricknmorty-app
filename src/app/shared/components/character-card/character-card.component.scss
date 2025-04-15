@@ -31,8 +31,18 @@ $white: map-get($colors, "white");
   }
 
   .curved {
+    z-index: 1;
     inset: calc(100% - 3.5em) 0 0 calc(100% - 3.5em);
     border-top-left-radius: 1.25em;
+
+    button {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      font-size: 1.2rem;
+      opacity: 60%;
+    }
+
     &::before {
       inset: calc(100% - 1.25em) 0 0 -1.25em;
       border-bottom-right-radius: 1.25em;

@@ -63,7 +63,5 @@ export function filterCharSpecies(species: string) {
     },
   };
 
-  console.log(isHuman);
-
   return speciesMap[isHuman];
 }
