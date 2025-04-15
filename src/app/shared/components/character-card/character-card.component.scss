@@ -1,0 +1,73 @@
+@import "custom";
+
+$white: map-get($colors, "white");
+
+.custom-card {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  background: $white;
+  border-radius: 1em;
+  position: relative;
+  border: 10px solid $white;
+  overflow: hidden;
+
+  .border {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 4em;
+    height: 4em;
+    background: $white;
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      width: 1.25em;
+      height: 1.25em;
+      background: transparent;
+    }
+  }
+
+  .curved {
+    inset: calc(100% - 3.5em) 0 0 calc(100% - 3.5em);
+    border-top-left-radius: 1.25em;
+    &::before {
+      inset: calc(100% - 1.25em) 0 0 -1.25em;
+      border-bottom-right-radius: 1.25em;
+      box-shadow: 0.3em 0.3em 0 0.3em $white;
+    }
+    &::after {
+      inset: -1.25em 0 0 2.75em;
+      border-bottom-right-radius: 1.25em;
+      box-shadow: 0.3em 0.3em 0 0.3em $white;
+    }
+  }
+
+  img {
+    border-radius: 1em;
+    width: 250px;
+    transition: ease-out 0.2s;
+  }
+
+  .char-infos {
+    left: 0;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    border-radius: 10px;
+
+    i {
+      font-size: 1.2rem;
+    }
+  }
+
+  &:hover {
+    > img {
+      opacity: 60%;
+    }
+    cursor: pointer;
+  }
+}

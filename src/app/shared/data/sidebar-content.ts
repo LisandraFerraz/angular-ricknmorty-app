@@ -2,7 +2,7 @@ export const sidebarContent = [
   {
     id: 1,
     label: 'Início',
-    path: '/',
+    path: '/home',
   },
   {
     id: 2,

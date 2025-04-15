@@ -1,5 +1,10 @@
 @import "custom";
 
+$white: map-get($colors, "white");
+$greyish: map-get($colors, "greyish");
+$darker_space: map-get($colors, "darker_space");
+$esmerald: map-get($colors, "esmerald");
+
 .content-wrapper {
   display: flex;
   flex-direction: row;
@@ -34,6 +39,7 @@
   .content-group {
     background-color: $greyish;
     width: 100%;
+    height: 100%;
 
     .content {
       padding: 25px;

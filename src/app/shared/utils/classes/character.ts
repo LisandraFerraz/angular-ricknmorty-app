@@ -9,20 +9,21 @@ export class Character {
   location: { name: string; url: string } = { name: '', url: '' };
   episode: string[] = [];
   url: string = '';
+  image: string = '';
   created: string = '';
 }
 
 export enum CharacterGenders {
-  all = '',
-  female = 'female',
-  male = 'male',
-  genderless = 'genderless',
+  all = '', //exclusivo para filtros, nao se aplica aos itens em tela
+  Female = 'Female',
+  Male = 'Male',
+  Genderless = 'Genderless',
   unknown = 'unknown',
 }
 
 export enum CharacterStatus {
-  all = '',
-  alive = 'alive',
-  dead = 'dead',
+  all = '', //exclusivo para filtros, nao se aplica aos itens em tela
+  Alive = 'Alive',
+  Dead = 'Dead',
   unknown = 'unknown',
 }

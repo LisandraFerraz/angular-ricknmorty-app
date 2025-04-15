@@ -1,1 +1,26 @@
-<p>character-card works!</p>
+<div class="bg-white rounded-5 custom-card position-relative">
+  <div>
+    <!-- {{ data.image }}
+    {{ data.gender }}
+    {{ data.location }}
+    {{ data.origin }} -->
+  </div>
+  <div class="border curved">
+    <i class="bi bi-heart"></i>
+  </div>
+  <span class="fw-bold pb-2">
+    {{ data.name }}
+  </span>
+  <img [src]="data.image" alt="" />
+  <div class="char-infos position-absolute bg-white">
+    <span>
+      <i [class]="filterGender(data.gender).icon"></i>
+    </span>
+    <span>
+      <i [class]="filterStatus(data.status).icon"></i>
+    </span>
+    <span>
+      <i [class]="filterSpecies(data.species).icon"></i>
+    </span>
+  </div>
+</div>

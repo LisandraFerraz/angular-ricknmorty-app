@@ -1,9 +1,10 @@
-<div>
+<div class="">
   <h3>Encontre todos os personagens da série!</h3>
-
-  <div class="">
+  <div class="row no-padding-row gap-4 p0">
     @for(char of characterList; track char.id){
-    <app-character-card [data]="char" />
+    <div class="col-auto">
+      <app-character-card [data]="char" />
+    </div>
     }
   </div>
 </div>
