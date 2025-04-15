@@ -14,9 +14,9 @@ export class Character {
 
 export enum CharacterGenders {
   all = '',
-  Female = 'Female',
-  Male = 'Male',
-  Genderless = 'Genderless',
+  female = 'female',
+  male = 'male',
+  genderless = 'genderless',
   unknown = 'unknown',
 }
 

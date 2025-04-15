@@ -15,6 +15,7 @@ export class SearchService {
   searchContent(params: {}) {
     const searchPromise = this.coreApi.get(endpoints.getCharacter, { params });
 
+    console.log('params | ', params);
     searchPromise.subscribe({
       next: (res) => {
         this.searchResultSub.next(res);
