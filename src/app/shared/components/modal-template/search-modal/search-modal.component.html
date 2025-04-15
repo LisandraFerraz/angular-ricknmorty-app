@@ -1,0 +1,8 @@
+<app-modal-template [isSearch]="true" (onSearch)="search()">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Buscar..."
+    [value]="searchQuery.name"
+  />
+</app-modal-template>

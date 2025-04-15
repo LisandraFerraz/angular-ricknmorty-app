@@ -1,1 +1,9 @@
-<p>characters-list works!</p>
+<div>
+  <h3>Encontre todos os personagens da série!</h3>
+
+  <div class="">
+    @for(char of characterList; track char.id){
+    <app-character-card [data]="char" />
+    }
+  </div>
+</div>

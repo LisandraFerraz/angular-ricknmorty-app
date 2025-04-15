@@ -1,25 +1,28 @@
-export interface ICharacter {
-  id: number;
-  name: string;
-  status: CharacterStatus;
-  species: string;
-  type: string;
-  gender: CharacterGenders;
-  origin: { name: string; url: string };
-  location: { name: string; url: string };
-  episode: string[];
-  url: string;
-  created: string;
+export class Character {
+  id: number = 0;
+  name: string = '';
+  status: CharacterStatus = CharacterStatus.all;
+  species: string = '';
+  type: string = '';
+  gender: CharacterGenders = CharacterGenders.all;
+  origin: { name: string; url: string } = { name: '', url: '' };
+  location: { name: string; url: string } = { name: '', url: '' };
+  episode: string[] = [];
+  url: string = '';
+  created: string = '';
 }
 
-enum CharacterGenders {
+export enum CharacterGenders {
+  all = '',
   Female = 'Female',
   Male = 'Male',
   Genderless = 'Genderless',
   unknown = 'unknown',
 }
 
-enum CharacterStatus {
-  Alive = 'Alive',
-  Dead = 'Dead',
+export enum CharacterStatus {
+  all = '',
+  alive = 'alive',
+  dead = 'dead',
+  unknown = 'unknown',
 }

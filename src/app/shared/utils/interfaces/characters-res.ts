@@ -1,11 +1,11 @@
-import { ICharacter } from './character';
+import { Character } from './character';
 
-export interface ICharacterRes {
+export interface CharacterRes {
   info: {
     count: number;
     pages: number;
     next: string | null;
     prev: string | null;
   };
-  results: ICharacter[];
+  results: Character[];
 }

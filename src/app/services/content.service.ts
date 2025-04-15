@@ -8,8 +8,8 @@ import { endpoints } from '../core/endpoints';
 export class ContentService {
   constructor(private coreApi: CoreApiService) {}
 
-  listAllCharacters(params?: {}) {
-    return this.coreApi.get(endpoints.getCharacter, { params }); //page=2&name=rick&status=alive
+  listAllCharacters(params: {}) {
+    return this.coreApi.get(endpoints.getCharacter, { params });
   }
 
   // [FEATRURE]: usar para listar personagens favoritos adicionados pelo usuário

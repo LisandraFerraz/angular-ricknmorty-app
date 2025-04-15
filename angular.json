@@ -21,6 +21,7 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
+
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -28,8 +29,16 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/global.scss"],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
+            "styles": [
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "src/global.scss"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -81,8 +90,13 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/global.scss"],
-            "scripts": []
+            "styles": [
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "src/global.scss"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           }
         }
       }

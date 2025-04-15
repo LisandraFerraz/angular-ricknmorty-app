@@ -12,7 +12,6 @@ export const interceptorApi: HttpInterceptorFn = (req, next) => {
   const request = req.clone({
     url: env.BASE_URL + req.url,
   });
-  console.log('request.url | ', request);
 
   return next(request).pipe(
     finalize(() => loader.isLoading.next(false)),

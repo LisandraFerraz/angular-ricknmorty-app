@@ -1,4 +1,35 @@
-<div>
-  <h1>Sidebar</h1>
-  <ng-content />
+<div class="content-wrapper">
+  <div class="sidebar">
+    <div class="sidebar_header">
+      <img src="" alt="" />
+    </div>
+    <div class="sidebar_list">
+      <ul>
+        @for (nav of navList; track nav.id) {
+        <li [class]="isRouteActive(nav.path) ? 'active-route' : ''">
+          <a [routerLink]="nav.path">{{ nav.label }}</a>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+  <div class="content-group">
+    <div class="header">
+      <div class="input-group p-3">
+        <input
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          type="text"
+          class="form-control"
+          placeholder="Buscar..."
+        />
+        <div class="modal fade" id="exampleModal">
+          <app-search-modal />
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <ng-content />
+    </div>
+  </div>
 </div>
