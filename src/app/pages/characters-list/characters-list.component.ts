@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ContentService } from '../../services/content.service';
-import { CharacterQuery } from 'app/shared/utils/classes/payload';
-import { Character } from 'app/shared/utils/interfaces/character';
+import { CharacterQuery } from 'app/shared/utils/classes/queries';
+import { Character } from 'app/shared/utils/classes/character';
 import { CharacterCardComponent } from 'app/shared/components/character-card/character-card.component';
 import { SearchService } from 'app/services/search.service';
 import { Subscription } from 'rxjs';
@@ -45,7 +45,8 @@ export class CharactersListComponent {
         );
       },
       error: (error: any) => {
-        console.error('Erro ao realizar a chamad | ', error);
+        // [WIP] Adicionar melhor tratamento de erro
+        console.error('Não foi possível listar os personagens.', error);
       },
     });
   }

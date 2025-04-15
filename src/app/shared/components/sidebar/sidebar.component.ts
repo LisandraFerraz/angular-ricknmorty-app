@@ -15,8 +15,11 @@ export class SidebarComponent {
   navList = sidebarContent;
 
   isRouteActive(route: string) {
-    const routeTest = this.route.url.split('/').pop();
+    return route === this.route.url;
+  }
 
-    return routeTest === route;
+  hideHeader(): boolean {
+    const hasRoutes = ['/characters', '/episodes'];
+    return hasRoutes.includes(this.route.url);
   }
 }

@@ -1,4 +1,4 @@
-import { Character } from './character';
+import { Character } from '../classes/character';
 
 export interface CharacterRes {
   info: {

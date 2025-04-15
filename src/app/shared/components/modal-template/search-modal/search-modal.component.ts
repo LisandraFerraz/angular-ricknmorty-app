@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ModalTemplateComponent } from '../modal-template.component';
-import { CharacterQuery } from 'app/shared/utils/classes/payload';
+import { CharacterQuery } from 'app/shared/utils/classes/queries';
 import { SearchService } from 'app/services/search.service';
 import {
   CharacterGenders,
   CharacterStatus,
-} from 'app/shared/utils/interfaces/character';
+} from 'app/shared/utils/classes/character';
 import { FormsModule } from '@angular/forms';
 
 @Component({

@@ -17,6 +17,10 @@ export class ContentService {
     return this.coreApi.get(`${endpoints.getCharacter}/${id}`);
   }
 
+  listAllEpisodes(params: {}) {
+    return this.coreApi.get(endpoints.getEpisode, { params });
+  }
+
   listEpisode(id: string | number) {
     return this.coreApi.get(`${endpoints.getEpisode}/${id}`);
   }

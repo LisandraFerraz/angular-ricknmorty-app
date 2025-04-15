@@ -1,4 +1,4 @@
-import { CharacterGenders, CharacterStatus } from '../interfaces/character';
+import { CharacterGenders, CharacterStatus } from './character';
 
 export class CharacterQuery {
   name: string = '';

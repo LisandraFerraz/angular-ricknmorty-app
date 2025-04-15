@@ -14,6 +14,7 @@
     </div>
   </div>
   <div class="content-group">
+    @if(hideHeader()){
     <div class="header">
       <div class="input-group p-3">
         <input
@@ -28,6 +29,7 @@
         </div>
       </div>
     </div>
+    }
     <div class="content">
       <ng-content />
     </div>

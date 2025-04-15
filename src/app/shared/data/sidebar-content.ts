@@ -7,11 +7,11 @@ export const sidebarContent = [
   {
     id: 2,
     label: 'Personagens',
-    path: 'characters',
+    path: '/characters',
   },
   {
     id: 3,
     label: 'Episódios',
-    path: 'episodes',
+    path: '/episodes',
   },
 ];
