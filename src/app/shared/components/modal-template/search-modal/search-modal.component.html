@@ -1,48 +1,12 @@
-<app-modal-template [isSearch]="true" (onSearch)="search()">
-  <div class="container d-grid gap-2">
-    <div class="row">
-      <div class="col">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Buscar..."
-          [(ngModel)]="searchQuery.name"
-        />
-      </div>
-    </div>
-    <div class="dropdown-container">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar..."
-        [(ngModel)]="searchQuery.type"
-      />
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar..."
-        [(ngModel)]="searchQuery.species"
-      />
-      <select
-        [(ngModel)]="searchQuery.status"
-        class="form-select"
-        aria-label="Default select example"
-      >
-        <option selected>Selecione uma opção</option>
-        @for(status of charStatus; track status) {
-        <option selected>{{ status }}</option>
-        }
-      </select>
-      <select
-        [(ngModel)]="searchQuery.gender"
-        class="form-select"
-        aria-label="Default select example"
-      >
-        <option selected>Selecione uma opção</option>
-        @for(gender of charGenders; track gender) {
-        <option selected>{{ gender }}</option>
-        }
-      </select>
-    </div>
-  </div>
+<app-modal-template
+  [isSearch]="true"
+  (onSearch)="search()"
+  (onCancel)="clearQuery()"
+  [title]="setModalTitle()"
+>
+  @if(checkSearchType()){
+  <app-search-character [query]="searchQuery" />
+  } @else {
+  <app-search-episode />
+  }
 </app-modal-template>

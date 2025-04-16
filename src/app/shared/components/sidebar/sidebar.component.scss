@@ -43,8 +43,12 @@ $esmerald: map-get($colors, "esmerald");
     margin-left: 240px;
 
     .input-group {
-      input {
+      .fake-searchbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         height: 50px;
+        cursor: text;
       }
     }
 

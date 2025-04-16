@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-episodes-card',
   standalone: true,
-  imports: [EpisodeDetailsModalComponent],
+  imports: [],
   templateUrl: './episodes-card.component.html',
   styleUrl: './episodes-card.component.scss',
 })

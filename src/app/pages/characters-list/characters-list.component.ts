@@ -15,37 +15,69 @@ import { InfiniteScroll } from 'app/shared/utils/directives/infinite-scroll.dire
   styleUrl: './characters-list.component.scss',
 })
 export class CharactersListComponent {
+  private sub!: Subscription;
+  private limitSignal = signal<number>(30);
+
   constructor(
     private contentService: ContentService,
     private searchService: SearchService
   ) {}
 
-  page = 1;
-
   query = new CharacterQuery();
   characterList: Character[] = [];
   searchResults: any = [];
-
-  private sub!: Subscription;
-
-  private limitSignal = signal<number>(30);
   hasMorePages: boolean = true;
+  isFiltered: boolean = false;
 
   ngOnInit(): void {
-    this.listCharacters(this.page);
+    this.searchService.currentQuery$.subscribe((query: any) => {
+      if (query) {
+        const isFirstLoad = !this.query;
+
+        this.query = query;
+
+        if (isFirstLoad || query.page === 1) {
+          this.characterList = [];
+        }
+      }
+    });
 
     this.sub = this.searchService.searchResult.subscribe({
-      next: (res) => {
-        this.searchResults = res;
+      next: (res: any) => {
+        const loadedCharacters = res.results.map((char: Character) =>
+          Object.assign(new Character(), char)
+        );
+
+        if (this.query.page === 1 && !res.info.next) {
+          this.characterList = loadedCharacters;
+        } else {
+          this.characterList = [...this.characterList, ...loadedCharacters];
+        }
+
+        this.hasMorePages = !!res.info.next;
       },
     });
+
+    const savedQuery = localStorage.getItem('@characterQuery');
+
+    if (savedQuery) {
+      this.isFiltered = true;
+      const parsed = JSON.parse(savedQuery);
+      this.searchService.searchContent(parsed);
+    } else {
+      this.isFiltered = false;
+      this.listCharacters(1);
+    }
   }
 
   loadMoreData() {
     if (!this.hasMorePages) return;
-
-    this.page++;
-    this.listCharacters(this.page);
+    this.query.page++;
+    if (this.isFiltered) {
+      this.searchService.searchContent(this.query);
+    } else {
+      this.listCharacters(this.query.page);
+    }
   }
 
   listCharacters(page: number) {
@@ -56,11 +88,13 @@ export class CharactersListComponent {
           Object.assign(new Character(), item)
         );
 
-        this.characterList = [...this.characterList, ...loadedCharacters];
-
-        if (!res.info.next) {
-          this.hasMorePages = false;
+        if (page === 1) {
+          this.characterList = loadedCharacters;
+        } else {
+          this.characterList = [...this.characterList, ...loadedCharacters];
         }
+
+        this.hasMorePages = !!res.info.next;
       },
       error: (error: any) => {
         // [WIP] Adicionar melhor tratamento de erro
@@ -71,5 +105,6 @@ export class CharactersListComponent {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.characterList = [];
   }
 }

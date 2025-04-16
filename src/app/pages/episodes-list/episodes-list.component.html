@@ -1,1 +1,15 @@
-<p>episodes-list works!</p>
+<div
+  class="episodes-grid row no-padding-row gap-2"
+  appInfiniteScroll
+  (nearEnd)="loadMoreData()"
+>
+  @if(!episodesList){
+  <h4 class="my-4">Não existem episódios com esse personagem.</h4>
+  } @else {
+  <h4 class="my-4">Episódios</h4>
+  @for(ep of episodesList; track ep){
+  <div class="col-auto">
+    <app-episodes-card [episode]="ep" />
+  </div>
+  } }
+</div>

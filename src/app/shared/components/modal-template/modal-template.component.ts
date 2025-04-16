@@ -15,6 +15,7 @@ export class ModalTemplateComponent {
   @Input() title: string = '';
 
   @Output() onSearch: EventEmitter<void> = new EventEmitter();
+  @Output() onCancel: EventEmitter<void> = new EventEmitter();
 
   ngOnInit(): void {}
 
@@ -24,5 +25,9 @@ export class ModalTemplateComponent {
 
   closeModal() {
     this.modalService.dismissAll();
+  }
+
+  cancelAction() {
+    this.onCancel.emit();
   }
 }

@@ -17,15 +17,12 @@
     @if(hideHeader()){
     <div class="header">
       <div class="input-group p-3">
-        <input
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          type="text"
-          class="form-control rounded-5"
-          placeholder="Buscar..."
-        />
-        <div class="modal fade" id="exampleModal">
-          <app-search-modal />
+        <div
+          (click)="openModal()"
+          class="form-control fake-searchbar rounded-5 px-4"
+        >
+          <span>"Buscar..."</span>
+          <i class="bi bi-search"></i>
         </div>
       </div>
     </div>
