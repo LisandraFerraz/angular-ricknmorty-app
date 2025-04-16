@@ -4,14 +4,17 @@ O projeto foi criado com o objetivo de criar uma plataforma limpa e convidativa 
 
 Com essa ferramente, fãs pode pesquisar sobre os personagens - e versões diferentes dos mesmos - que mais gosta.
 
+Live version [aqui](https://angular-ricknmorty-3l6k3x8es-lisandraferrazs-projects.vercel.app/characters)!
+
 ![Prévia do projeto](https://github.com/user-attachments/assets/55202d3e-f7a2-4045-994d-0927b420cf6a)
+
 
 ## Rodando localmente
 
-Requisitos:
 
+Requisitos: 
 - Angular ver. >18.2.18
-- Node >18.19.1
+- Node >18.19.1 
 
 Comandos para instalação e inicialização:
 
@@ -36,7 +39,7 @@ Comandos para instalação e inicialização:
       │   │   └── episodes-list // listagem de episódios
       │   ├── services
       │   │   ├── content.service.ts // funções para retorno de observables em requisições HTTP
-      │   │   ├── loader.service.ts // emissor de behavior para o loader
+      │   │   ├── loader.service.ts // emissor de behavior para o loader 
       │   │   └── search.service.ts // funções de filtragem compartilhadas entre personagens e episodios
       │   └── shared
       │       ├── components
@@ -51,8 +54,8 @@ Comandos para instalação e inicialização:
       │       │   │       ├── search-character // modal para filtragem de personagem com campos especificos
       │       │   │       ├── search-episode // modal para filtragem de episodio com campos especificoss
       │       │   └── sidebar
-      │       ├── data // mocks
-      │       └── utils
+      │       ├── data // mocks 
+      │       └── utils 
       │           ├── classes // classes das propriedades
       │           ├── directives // diretiva para scroll infinito
       │           ├── functions // funcoes compartilhaveis
