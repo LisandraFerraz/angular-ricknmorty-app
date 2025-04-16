@@ -1,27 +1,64 @@
-# AngularRicknmortyApp
+# Rick and Morty Pédia 🧪🤓
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.18.
+O projeto foi criado com o objetivo de criar uma plataforma limpa e convidativa para fãs da série Rick and Morty.
 
-## Development server
+Com essa ferramente, fãs pode pesquisar sobre os personagens - e versões diferentes dos mesmos - que mais gosta.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+![Prévia do projeto](https://github.com/user-attachments/assets/55202d3e-f7a2-4045-994d-0927b420cf6a)
 
-## Code scaffolding
+## Rodando localmente
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Requisitos:
 
-## Build
+- Angular ver. >18.2.18
+- Node >18.19.1
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Comandos para instalação e inicialização:
 
-## Running unit tests
+      > npm install -g @angular/cli
+      > git clone <link-do-repositorio>
+      > cd angular-ricknmorty-app
+      > npm install
+      > ng serve
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Guia pelo projeto
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+      src
+      ├── app
+      │   ├── core
+      │   │   ├── core-api.service.ts // configuração de HTTP requests
+      │   │   ├── endpoints.ts // variáveis de endpoints de APIs
+      │   │   ├── environment.ts // ambiente para URLs
+      │   │   └── interceptor.interceptor.ts // interceptor de requests HTTP, prepara a URL
+      │   ├── pages
+      │   │   ├── character-details // página para detalhes de personagens
+      │   │   ├── characters-list // listagem de personagens
+      │   │   └── episodes-list // listagem de episódios
+      │   ├── services
+      │   │   ├── content.service.ts // funções para retorno de observables em requisições HTTP
+      │   │   ├── loader.service.ts // emissor de behavior para o loader
+      │   │   └── search.service.ts // funções de filtragem compartilhadas entre personagens e episodios
+      │   └── shared
+      │       ├── components
+      │       │   ├── character-card // componente card para personagens
+      │       │   ├── episodes-card // componente card para episódios
+      │       │   ├── horizontal-scroller // scroller para listagem horizontal
+      │       │   ├── list-header // header dos componentes de listagem
+      │       │   ├── loader // componente visual loader
+      │       │   ├── modal-template // template padrão para modals
+      │       │   │   ├── episode-details-modal // modal de detalhes do episodio
+      │       │   │   └── search-modal // template padrão para filtragem
+      │       │   │       ├── search-character // modal para filtragem de personagem com campos especificos
+      │       │   │       ├── search-episode // modal para filtragem de episodio com campos especificoss
+      │       │   └── sidebar
+      │       ├── data // mocks
+      │       └── utils
+      │           ├── classes // classes das propriedades
+      │           ├── directives // diretiva para scroll infinito
+      │           ├── functions // funcoes compartilhaveis
+      │           └── interfaces // interfaces de referencia para propriedades
+      ├── global.scss // arquivo de estilo padrão
+      ├── index.html
+      ├── main.ts
+      └── styles
+         └── _custom.scss // configuração de variáveis de estilo e reset de outras do bootstrap

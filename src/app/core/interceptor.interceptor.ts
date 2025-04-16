@@ -16,7 +16,6 @@ export const interceptorApi: HttpInterceptorFn = (req, next) => {
   return next(request).pipe(
     finalize(() => loader.isLoading.next(false)),
     catchError((error) => {
-      // adicionar um toast notif
       console.error('Erro no interceptor | ', error);
       return throwError(() => error);
     })
