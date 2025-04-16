@@ -9,19 +9,29 @@ import { BehaviorSubject, Subject, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService {
-  private searchResultSub = new Subject<any[]>();
+  private searchResultSub = new BehaviorSubject<any[] | null>([]);
   searchResult = this.searchResultSub.asObservable();
 
-  private currentQuerySub = new BehaviorSubject<
-    CharacterQuery | EpisodeQuery | null
-  >(null);
-  currentQuery$ = this.currentQuerySub.asObservable();
+  private currentCharacterQuerSub$ = new BehaviorSubject<CharacterQuery | null>(
+    null
+  );
+  private currentEpisodeQuerySub$ = new BehaviorSubject<EpisodeQuery | null>(
+    null
+  );
+
+  currentCharQuery$ = this.currentCharacterQuerSub$.asObservable();
+  currentEpQuery$ = this.currentEpisodeQuerySub$.asObservable();
 
   constructor(private coreApi: CoreApiService, private route: Router) {}
 
   searchContent(params: CharacterQuery | EpisodeQuery) {
-    this.currentQuerySub.next(params);
+    const currentPath = this.route.url;
 
+    if (currentPath.includes('characters')) {
+      this.currentCharacterQuerSub$.next(params as CharacterQuery);
+    } else if (currentPath.includes('episodes')) {
+      this.currentEpisodeQuerySub$.next(params as EpisodeQuery);
+    }
     const endpointsMap: { [key: string]: string } = {
       '/characters': endpoints.getCharacter,
       '/episodes': endpoints.getEpisode,
@@ -35,9 +45,13 @@ export class SearchService {
         this.searchResultSub.next(res);
       },
       error: (error) => {
-        // [WIP] Adicionar melhor tratamento de erro
         console.error('Erro ao pesquisar :', error);
       },
     });
+  }
+
+  clearSearchResult() {
+    this.searchResultSub.next(null);
+    this.currentCharacterQuerSub$.next(null);
   }
 }

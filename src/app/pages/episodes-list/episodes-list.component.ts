@@ -6,6 +6,7 @@ import { EpisodesCardComponent } from 'app/shared/components/episodes-card/episo
 import { ListHeaderComponent } from 'app/shared/components/list-header/list-header.component';
 import { Episode } from 'app/shared/utils/classes/episode';
 import { EpisodeQuery } from 'app/shared/utils/classes/queries';
+import { IEpisodeRes } from 'app/shared/utils/interfaces/characters-res';
 import { Subscription } from 'rxjs';
 
 interface IPageInfo {
@@ -41,7 +42,7 @@ export class EpisodesListComponent implements OnDestroy {
   };
 
   ngOnInit(): void {
-    this.searchService.currentQuery$.subscribe((query: any) => {
+    this.searchService.currentEpQuery$.subscribe((query: any) => {
       if (query) {
         this.isFiltered = true;
         const isFirstLoad = !this.query;
@@ -56,15 +57,18 @@ export class EpisodesListComponent implements OnDestroy {
 
     this.sub = this.searchService.searchResult.subscribe({
       next: (res: any) => {
-        this.pageInfo = res.info;
-        const loadedEpisodes = res.results.map((ep: Episode) =>
+        this.pageInfo = res?.info;
+        const loadedEpisodes = res.results?.map((ep: Episode) =>
           Object.assign(new Episode(), ep)
         );
         this.episodesList = Array.isArray(loadedEpisodes)
           ? loadedEpisodes
           : [loadedEpisodes];
 
-        this.hasMorePages = !!res.info.next;
+        this.hasMorePages = !!res.info?.next;
+      },
+      error: (err) => {
+        this.episodesList = [];
       },
     });
 
@@ -83,17 +87,17 @@ export class EpisodesListComponent implements OnDestroy {
   listEpisodes(page: number) {
     this.query.page = page;
     this.contentService.listAllEpisodes(this.query).subscribe({
-      next: (res) => {
+      next: (res: IEpisodeRes) => {
         this.isFiltered = false;
         this.pageInfo = res.info;
-        const loadedEpisodes = res.results.map((ep: Episode) =>
+        const loadedEpisodes = res.results?.map((ep: Episode) =>
           Object.assign(new Episode(), ep)
         );
         this.episodesList = Array.isArray(loadedEpisodes)
           ? loadedEpisodes
           : [loadedEpisodes];
 
-        this.hasMorePages = !!res.info.next;
+        this.hasMorePages = !!res.info?.next;
       },
       error: (error) => {
         console.error('Não foi possível listar os episódios ', error);
@@ -104,11 +108,12 @@ export class EpisodesListComponent implements OnDestroy {
   clearFilters() {
     localStorage.removeItem('@episodeQuery');
     this.query = new EpisodeQuery();
+    this.episodesList = [];
+    this.searchService.clearSearchResult();
     this.listEpisodes(1);
   }
 
   ngOnDestroy(): void {
-    this.episodesList = [];
     this.sub.unsubscribe();
     this.clearFilters();
   }

@@ -1,4 +1,4 @@
-import { Component, Pipe } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContentService } from 'app/services/content.service';
 import { EpisodesCardComponent } from 'app/shared/components/episodes-card/episodes-card.component';

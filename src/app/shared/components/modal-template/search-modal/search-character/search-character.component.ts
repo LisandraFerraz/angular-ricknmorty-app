@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-  Character,
   CharacterGenders,
   CharacterStatus,
 } from 'app/shared/utils/classes/character';
@@ -17,6 +16,18 @@ import { CharacterQuery } from 'app/shared/utils/classes/queries';
 export class SearchCharacterComponent {
   @Input() query: CharacterQuery = new CharacterQuery();
 
-  charStatus = Object.keys(CharacterStatus);
-  charGenders = Object.keys(CharacterGenders);
+  charStatus = [
+    { value: '', label: 'Todos' },
+    { value: CharacterStatus.Alive, label: 'Vivo' },
+    { value: CharacterStatus.Dead, label: 'Morto' },
+    { value: CharacterStatus.unknown, label: 'Desconhecido' },
+  ];
+
+  charGenders = [
+    { value: '', label: 'Todos' },
+    { value: CharacterGenders.Female, label: 'Fêmea' },
+    { value: CharacterGenders.Male, label: 'Macho' },
+    { value: CharacterGenders.Genderless, label: 'Neutro' },
+    { value: CharacterGenders.unknown, label: 'Desconhecido' },
+  ];
 }

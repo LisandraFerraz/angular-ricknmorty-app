@@ -1,13 +1,14 @@
 <div class="container">
-  <div class="go_back mb-4">
-    <a [routerLink]="['/characters']">
+  <div class="go_back mb-4 d-flex align-items-center">
+    <a [routerLink]="['/characters']" class="text-primary">
       <i class="bi bi-chevron-left"></i>
       Voltar aos personagens</a
     >
   </div>
 
+  @if(charData) {
   <div class="profile bg-white p-4 rounded-4">
-    <img [src]="charData.image" [alt]="charData.name" />
+    <img class="shadow-sm" [src]="charData.image" [alt]="charData.name" />
     <div>
       <h2>{{ charData.name }}</h2>
       <div class="profile-details d-flex flex-row gap-4">
@@ -26,6 +27,7 @@
       </div>
     </div>
   </div>
+  }
 
   <div class="episodes-grid gap-2">
     @if(!episodesData){
@@ -40,6 +42,7 @@
       </div>
       }
     </div>
+    @if(episodesData.length > 8){
     <div class="d-flex justify-content-end mt-4">
       <ngb-pagination
         class="m-0 p-0"
@@ -49,6 +52,6 @@
         aria-label="Default pagination"
       ></ngb-pagination>
     </div>
-    }
+    } }
   </div>
 </div>

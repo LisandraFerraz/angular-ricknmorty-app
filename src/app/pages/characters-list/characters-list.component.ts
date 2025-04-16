@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { ContentService } from '../../services/content.service';
 import { CharacterQuery } from 'app/shared/utils/classes/queries';
 import { Character } from 'app/shared/utils/classes/character';
@@ -7,6 +7,7 @@ import { SearchService } from 'app/services/search.service';
 import { Subscription } from 'rxjs';
 import { InfiniteScroll } from 'app/shared/utils/directives/infinite-scroll.directive';
 import { ListHeaderComponent } from 'app/shared/components/list-header/list-header.component';
+import { ICharacterRes } from 'app/shared/utils/interfaces/characters-res';
 
 @Component({
   selector: 'app-characters-list',
@@ -15,7 +16,7 @@ import { ListHeaderComponent } from 'app/shared/components/list-header/list-head
   templateUrl: './characters-list.component.html',
   styleUrl: './characters-list.component.scss',
 })
-export class CharactersListComponent {
+export class CharactersListComponent implements OnDestroy, OnInit {
   private sub!: Subscription;
   private limitSignal = signal<number>(30);
 
@@ -31,8 +32,7 @@ export class CharactersListComponent {
   isFiltered: boolean = false;
 
   ngOnInit(): void {
-    this.searchService.currentQuery$.subscribe((query: any) => {
-      console.log(query);
+    this.searchService.currentCharQuery$.subscribe((query: any) => {
       if (query) {
         const isFirstLoad = !this.query;
         this.isFiltered = true;
@@ -46,11 +46,11 @@ export class CharactersListComponent {
 
     this.sub = this.searchService.searchResult.subscribe({
       next: (res: any) => {
-        const loadedCharacters = res.results.map((char: Character) =>
+        const loadedCharacters = res.results?.map((char: Character) =>
           Object.assign(new Character(), char)
         );
 
-        if (this.query.page === 1 && !res.info.next) {
+        if (this.query.page === 1 && !res.info?.next) {
           this.characterList = Array.isArray(loadedCharacters)
             ? loadedCharacters
             : [loadedCharacters];
@@ -58,7 +58,7 @@ export class CharactersListComponent {
           this.characterList = [...this.characterList, ...loadedCharacters];
         }
 
-        this.hasMorePages = !!res.info.next;
+        this.hasMorePages = !!res.info?.next;
       },
     });
 
@@ -70,6 +70,7 @@ export class CharactersListComponent {
       this.searchService.searchContent(parsed);
     } else {
       this.isFiltered = false;
+      this.characterList = [];
       this.listCharacters(1);
     }
   }
@@ -87,7 +88,7 @@ export class CharactersListComponent {
   listCharacters(page: number) {
     this.query.page = page;
     this.contentService.listAllCharacters(this.query).subscribe({
-      next: (res: any) => {
+      next: (res: ICharacterRes) => {
         this.isFiltered = false;
         const loadedCharacters = res.results.map((item: Character) =>
           Object.assign(new Character(), item)
@@ -104,7 +105,7 @@ export class CharactersListComponent {
         this.hasMorePages = !!res.info.next;
       },
       error: (error: any) => {
-        console.error('Não foi possível listar os personagens.', error);
+        this.characterList = [];
       },
     });
   }
@@ -112,11 +113,13 @@ export class CharactersListComponent {
   clearFilters() {
     localStorage.removeItem('@characterQuery');
     this.query = new CharacterQuery();
+    this.characterList = [];
+    this.searchService.clearSearchResult();
     this.listCharacters(1);
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
-    this.characterList = [];
+    this.clearFilters();
   }
 }

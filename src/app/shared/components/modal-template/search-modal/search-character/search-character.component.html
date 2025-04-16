@@ -13,32 +13,10 @@
   </div>
   <div class="row no-padding-row gap-2">
     <div class="form-floating col">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar..."
-        id="charType"
-        [(ngModel)]="query.type"
-      />
-      <label class="mx-2" for="charType">Tipo do personagem</label>
-    </div>
-    <div class="form-floating col">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar..."
-        id="charSpecies"
-        [(ngModel)]="query.species"
-      />
-      <label class="mx-2" for="charSpecies">Espécie do personagem</label>
-    </div>
-  </div>
-  <div class="row no-padding-row gap-2">
-    <div class="form-floating col">
       <select [(ngModel)]="query.status" class="form-select" id="charStatus">
         <option selected>Selecione uma opção</option>
         @for(status of charStatus; track status) {
-        <option selected>{{ status }}</option>
+        <option [value]="status.value">{{ status.label }}</option>
         }
       </select>
       <label class="mx-2" for="charStatus">Status do personagem</label>
@@ -47,7 +25,7 @@
       <select [(ngModel)]="query.gender" class="form-select" id="charGenders">
         <option selected>Selecione uma opção</option>
         @for(gender of charGenders; track gender) {
-        <option selected>{{ gender }}</option>
+        <option [value]="gender.value">{{ gender.label }}</option>
         }
       </select>
       <label class="mx-2" for="charGenders">Gênero do personagem</label>

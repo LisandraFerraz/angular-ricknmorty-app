@@ -52,7 +52,7 @@ $blue: map-get($colors, "blue");
     width: 100%;
     margin-left: 240px;
     border-top-left-radius: 35px;
-    border-top-right-radius: 35px;
+    border-bottom-left-radius: 35px;
 
     .input-group {
       .fake-searchbar {

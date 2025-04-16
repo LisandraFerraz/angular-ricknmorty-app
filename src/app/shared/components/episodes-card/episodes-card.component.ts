@@ -4,6 +4,7 @@ import { formatSeason } from 'app/shared/utils/functions/format-season';
 import { EpisodeDetailsModalComponent } from '../modal-template/episode-details-modal/episode-details-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { formatAirDate } from 'app/shared/utils/functions/format-date';
 
 @Component({
   selector: 'app-episodes-card',
@@ -20,6 +21,7 @@ export class EpisodesCardComponent {
   isModalOpen: boolean = false;
 
   getEpisode = formatSeason;
+  getAirDate = formatAirDate;
 
   openModal(episode: Episode) {
     const data = {
