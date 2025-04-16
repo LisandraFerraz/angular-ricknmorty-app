@@ -40,7 +40,7 @@ export function filterCharStatus(status: CharacterStatus) {
       icon: 'bi bi-emoji-dizzy-fill text-danger',
     },
     [CharacterStatus.unknown]: {
-      label: 'Desconhedido',
+      label: 'Desconhecido',
       icon: 'bi bi-emoji-neutral-fill text-warning',
     },
   };

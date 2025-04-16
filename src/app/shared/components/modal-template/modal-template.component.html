@@ -1,23 +1,17 @@
-<div class="modal-dialog modal-lg">
+<div>
   <div class="modal-content">
     <div class="modal-header">
       <h1 class="modal-title fs-5" id="exampleModalLabel">{{ title }}</h1>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
+      <button type="button" class="btn-close" (click)="closeModal()"></button>
     </div>
     <div class="modal-body">
       <ng-content />
     </div>
     <div class="modal-footer">
+      @if(isSearch) {
       <button type="button" class="btn btn-secondary" (click)="closeModal()">
-        <!-- data-bs-dismiss="modal" -->
         Cancelar
       </button>
-      @if(isSearch) {
       <button (click)="submitSearch()" type="button" class="btn btn-primary">
         Pesquisar
       </button>

@@ -1,25 +1,19 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContentService } from 'app/services/content.service';
 import { EpisodesCardComponent } from 'app/shared/components/episodes-card/episodes-card.component';
-import {
-  Character,
-  CharacterGenders,
-  CharacterStatus,
-} from 'app/shared/utils/classes/character';
+import { Character } from 'app/shared/utils/classes/character';
 import {
   filterCharGender,
   filterCharSpecies,
   filterCharStatus,
 } from 'app/shared/utils/functions/char-infos';
-import { EpisodeDetailsModalComponent } from '../../shared/components/modal-template/episode-details-modal/episode-details-modal.component';
 import { Episode } from 'app/shared/utils/classes/episode';
-import { formatSeason } from 'app/shared/utils/functions/format-season';
 
 @Component({
   selector: 'app-character-details',
   standalone: true,
-  imports: [EpisodesCardComponent, EpisodeDetailsModalComponent],
+  imports: [EpisodesCardComponent, RouterLink],
   templateUrl: './character-details.component.html',
   styleUrl: './character-details.component.scss',
 })
@@ -37,12 +31,16 @@ export class CharacterDetailsComponent {
   filterSpecies = filterCharSpecies;
 
   ngOnInit(): void {
-    this.getCharacterDetails();
+    this.route.paramMap.subscribe((params: any) => {
+      const charId = Number(params.get('id'));
+      if (charId) {
+        this.getCharacterDetails(charId);
+      }
+    });
   }
 
-  getCharacterDetails() {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.contentService.listCharacter(Number(id)).subscribe({
+  getCharacterDetails(id: number) {
+    this.contentService.listCharacter(id).subscribe({
       next: (res) => {
         this.charData = res;
         this.getEpisodes();
@@ -54,11 +52,12 @@ export class CharacterDetailsComponent {
   }
 
   getEpisodes() {
-    const epIds = this.charData.episode.map((ep: any) => ep.slice(-1));
+    const epIds = this.charData.episode.map((ep: any) => +ep.split('/').pop()!);
+    const ids = epIds.length > 1 ? epIds.join(',') : epIds.pop();
 
-    this.contentService.listEpisode(epIds.join(',')).subscribe({
+    this.contentService.listEpisode(String(ids)).subscribe({
       next: (res) => {
-        this.episodesData = res;
+        this.episodesData = Array.isArray(res) ? res : [res];
       },
       error: (err) => {
         console.error('Não foi possível listar os episódios...', err);

@@ -1,16 +1,11 @@
 export const sidebarContent = [
   {
     id: 1,
-    label: 'Início',
-    path: '/home',
-  },
-  {
-    id: 2,
     label: 'Personagens',
     path: '/characters',
   },
   {
-    id: 3,
+    id: 2,
     label: 'Episódios',
     path: '/episodes',
   },

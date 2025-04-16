@@ -1,17 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalTemplateComponent } from '../modal-template.component';
 import { Episode } from 'app/shared/utils/classes/episode';
 import { ContentService } from 'app/services/content.service';
 import { Character } from 'app/shared/utils/classes/character';
-import { Router } from '@angular/router';
 import { HorizontalScrollerComponent } from '../../horizontal-scroller/horizontal-scroller.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { formatSeason } from 'app/shared/utils/functions/format-season';
 
 @Component({
   selector: 'app-episode-details-modal',
@@ -21,14 +15,17 @@ import { HorizontalScrollerComponent } from '../../horizontal-scroller/horizonta
   styleUrl: './episode-details-modal.component.scss',
 })
 export class EpisodeDetailsModalComponent {
-  constructor(private contentService: ContentService, private router: Router) {}
-
-  epData: Episode = new Episode();
+  constructor(
+    private contentService: ContentService,
+    private activeModal: NgbActiveModal
+  ) {}
 
   @Input() modalData: any = {};
-  @Output() close = new EventEmitter<void>();
 
+  epData: Episode = new Episode();
   charList: Character[] = [];
+
+  getEpisode = formatSeason;
 
   ngOnInit(): void {
     this.epData = this.modalData.episode;
@@ -36,13 +33,14 @@ export class EpisodeDetailsModalComponent {
   }
 
   getEpCharacters() {
-    const charIds = this.epData.characters
-      .map((char: string) => char.slice(-1))
-      .join(',');
+    const charIds = this.epData.characters.map(
+      (char: string) => +char.split('/').pop()!
+    );
+    const ids = charIds.length > 1 ? charIds.join(',') : charIds.pop();
 
-    this.contentService.listCharacter(charIds).subscribe({
+    this.contentService.listCharacter(String(ids)).subscribe({
       next: (res) => {
-        this.charList = res;
+        this.charList = Array.isArray(res) ? res : [res];
       },
       error: (err) => {
         console.error(err);
@@ -50,11 +48,12 @@ export class EpisodeDetailsModalComponent {
     });
   }
 
-  closeModal(): void {
-    this.close.emit();
+  goToCharPage(id: number) {
+    this.activeModal.close({ charId: id });
   }
 
-  goToCharPage(id: number) {
-    this.router.navigate([`/character/${id}`]);
+  ngOnDestroy(): void {
+    this.charList = [];
+    this.epData = new Episode();
   }
 }

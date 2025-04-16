@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Episode } from 'app/shared/utils/classes/episode';
 import { formatSeason } from 'app/shared/utils/functions/format-season';
 import { EpisodeDetailsModalComponent } from '../modal-template/episode-details-modal/episode-details-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-episodes-card',
@@ -12,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './episodes-card.component.scss',
 })
 export class EpisodesCardComponent {
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private router: Router) {}
 
   @Input() episode: Episode = new Episode();
 
@@ -20,12 +21,10 @@ export class EpisodesCardComponent {
 
   getEpisode = formatSeason;
 
-  ngOnInit(): void {}
-
   openModal(episode: Episode) {
     const data = {
       episode,
-      title: 'Detalhes do episódio',
+      title: `Episódio: ${episode.name}`,
     };
 
     const modalRef = this.modalService.open(EpisodeDetailsModalComponent, {
@@ -33,9 +32,21 @@ export class EpisodesCardComponent {
       size: 'lg',
     });
 
-    console.log('parent | , ', data);
-
     modalRef.componentInstance.modalData = data;
+
+    modalRef.closed.subscribe({
+      next: (res) => {
+        if (res.charId) {
+          this.router.navigate([`/character/${res.charId}`]);
+        }
+      },
+      error: (err) => {
+        console.error(
+          'Não foi possível encontrar o personagem selecionado. ',
+          err
+        );
+      },
+    });
   }
 
   ngOnDestroy(): void {}

@@ -1,6 +1,10 @@
 <div class="">
   <h3>Encontre todos os personagens da série!</h3>
-  <div class="row no-padding-row gap-4 p0">
+  <div
+    class="row no-padding-row gap-4 p0"
+    appInfiniteScroll
+    (nearEnd)="loadMoreData()"
+  >
     @for(char of characterList; track char.id){
     <div class="col-auto">
       <app-character-card [data]="char" />

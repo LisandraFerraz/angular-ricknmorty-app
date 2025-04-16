@@ -1,12 +1,15 @@
 <div class="container">
+  <div class="go_back">
+    <a [routerLink]="['/characters']">Voltar aos personagens</a>
+  </div>
   <div class="profile">
     <img [src]="charData.image" [alt]="charData.name" />
     <div>
       <h2>{{ charData.name }}</h2>
       <div class="profile-details d-flex flex-row gap-4">
         <div class="d-flex gap-2">
-          <i [class]="filterGender(charData.gender)?.icon"></i>
-          <span>{{ filterGender(charData.gender)?.label }}</span>
+          <i [class]="filterGender(charData.gender).icon"></i>
+          <span>{{ filterGender(charData.gender).label }}</span>
         </div>
         <div class="d-flex gap-2">
           <i [class]="filterStatus(charData.status).icon"></i>

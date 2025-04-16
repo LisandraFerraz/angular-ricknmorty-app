@@ -19,11 +19,15 @@ $colors: (
 
 @each $name, $value in $colors {
   .text-#{$name} {
-    color: $value;
+    color: $value !important;
   }
-  // .bg-#{$name} {
-  //   color: $value;
-  // }
+  .bg-#{$name} {
+    background-color: $value !important;
+  }
+  .text-bg-#{$name} {
+    background-color: $value !important;
+    color: map-get($map: $colors, $key: "white") !important;
+  }
 }
 
 // font

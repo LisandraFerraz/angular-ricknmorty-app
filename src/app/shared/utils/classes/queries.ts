@@ -6,6 +6,7 @@ export class CharacterQuery {
   species = '';
   type: string = '';
   gender: CharacterGenders = CharacterGenders.all;
+  page: number = 1;
 }
 export class EpisodeQuery {
   name = '';

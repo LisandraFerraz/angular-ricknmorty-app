@@ -24,7 +24,6 @@ export class SearchModalComponent {
   charGenders = Object.keys(CharacterGenders);
 
   search() {
-    console.log('searchQuery | ', this.searchQuery);
     this.searchService.searchContent(this.searchQuery);
   }
 
