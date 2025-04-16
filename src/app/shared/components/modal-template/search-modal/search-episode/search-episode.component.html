@@ -1,1 +1,24 @@
-<p>search-episode works!</p>
+<div class="container d-grid gap-2">
+  <div class="row no-padding-row gap-2">
+    <div class="col form-floating col">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar..."
+        id="epName"
+        [(ngModel)]="query.name"
+      />
+      <label class="mx-2" for="epName">Nome do episódio</label>
+    </div>
+    <div class="col form-floating col">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar..."
+        id="epNumber"
+        [(ngModel)]="query.episode"
+      />
+      <label class="mx-2" for="epNumber">Código do episódio (ex. S01E01)</label>
+    </div>
+  </div>
+</div>

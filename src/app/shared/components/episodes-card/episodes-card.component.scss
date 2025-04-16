@@ -1,0 +1,6 @@
+.card {
+  transition: ease-out 0.2s;
+  &:hover {
+    opacity: 80%;
+  }
+}

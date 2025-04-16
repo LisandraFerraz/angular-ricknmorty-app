@@ -9,7 +9,7 @@ export class CharacterQuery {
   page: number = 1;
 }
 export class EpisodeQuery {
-  name = '';
-  episode = '';
-  page = 1;
+  name: string = '';
+  episode: string = '';
+  page: number = 1;
 }

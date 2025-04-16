@@ -1,4 +1,4 @@
-<div class="card h-100" style="width: 18rem">
+<div class="card w-100 h-100 shadow-sm border-0" style="width: 18rem">
   <div class="card-body">
     <h5 class="card-title">{{ episode.name }}</h5>
     <h6 class="card-subtitle mb-2 text-body-secondary">
@@ -10,6 +10,11 @@
 
     <!-- data-bs-toggle="modal"
     data-bs-target="#exampleModal" -->
-    <button (click)="openModal(episode)" class="card-link">Detalhes</button>
+    <button
+      (click)="openModal(episode)"
+      class="card-link border-0 bg-transparent text-primary text-decoration-underline"
+    >
+      Detalhes
+    </button>
   </div>
 </div>

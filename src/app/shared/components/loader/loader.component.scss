@@ -1,13 +1,13 @@
 .loader-container {
-  position: absolute;
-  background-color: #000;
-  // background-color: rgba(9, 9, 9, 0.446);
+  position: fixed;
+  background-color: #00000079;
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1060;
+
   .loader {
     display: inline-flex;
     gap: 10px;
@@ -18,7 +18,7 @@
     height: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: linear-gradient(#222 0 0) top/100% 40% no-repeat,
+    background: linear-gradient(#91a6a5 0 0) top/100% 40% no-repeat,
       radial-gradient(farthest-side, #000 95%, #0000) 50%/8px 8px no-repeat #fff;
     animation: l7 1.5s infinite alternate ease-in;
   }

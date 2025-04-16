@@ -3,6 +3,7 @@
 $white: map-get($colors, "white");
 
 .custom-card {
+  width: 100%;
   display: grid;
   place-items: center;
   aspect-ratio: 1;
@@ -57,7 +58,6 @@ $white: map-get($colors, "white");
 
   img {
     border-radius: 1em;
-    width: 250px;
     transition: ease-out 0.2s;
   }
 

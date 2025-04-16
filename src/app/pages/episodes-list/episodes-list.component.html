@@ -1,15 +1,29 @@
-<div
-  class="episodes-grid row no-padding-row gap-2"
-  appInfiniteScroll
-  (nearEnd)="loadMoreData()"
->
+<div class="container">
   @if(!episodesList){
   <h4 class="my-4">Não existem episódios com esse personagem.</h4>
   } @else {
-  <h4 class="my-4">Episódios</h4>
-  @for(ep of episodesList; track ep){
-  <div class="col-auto">
-    <app-episodes-card [episode]="ep" />
+  <app-list-header
+    title="Enontre todos os episódios da série!"
+    (clearFilters)="clearFilters()"
+    [hasFilters]="isFiltered"
+  />
+  <div class="row no-padding-row gap-3">
+    @for(ep of episodesList; track ep){
+    <div class="col-auto">
+      <app-episodes-card [episode]="ep" />
+    </div>
+    }
+  </div>
+  @if(pageInfo.pages > 1){
+  <div class="d-flex justify-content-end mt-4">
+    <ngb-pagination
+      class="m-0 p-0"
+      [collectionSize]="pageInfo.count"
+      [pageSize]="20"
+      [(page)]="query.page"
+      (pageChange)="listEpisodes(query.page)"
+      aria-label="Default pagination"
+    ></ngb-pagination>
   </div>
   } }
 </div>

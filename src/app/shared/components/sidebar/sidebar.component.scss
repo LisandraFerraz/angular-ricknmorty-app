@@ -3,17 +3,28 @@
 $white: map-get($colors, "white");
 $greyish: map-get($colors, "greyish");
 $darker_space: map-get($colors, "darker_space");
-$esmerald: map-get($colors, "esmerald");
+$blue: map-get($colors, "blue");
 
 .content-wrapper {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  height: 100%;
+  background-color: $white;
+  min-height: 100vh;
+  height: max-content;
 
   .sidebar {
     background-color: $white;
     width: 240px;
+
+    .sidebar_header {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+
+      img {
+        width: 65px;
+      }
+    }
 
     &_list ul {
       list-style: none;
@@ -24,14 +35,14 @@ $esmerald: map-get($colors, "esmerald");
         a {
           text-decoration: none;
           color: $darker_space;
+          font-weight: 600;
         }
       }
       .active-route {
         color: $darker_space;
-        border-right: 5px solid $esmerald;
+        border-right: 5px solid $blue;
         > a {
-          color: $esmerald;
-          font-weight: 600;
+          color: $blue;
         }
       }
     }
@@ -39,8 +50,9 @@ $esmerald: map-get($colors, "esmerald");
   .content-group {
     background-color: $greyish;
     width: 100%;
-    height: 100%;
     margin-left: 240px;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
 
     .input-group {
       .fake-searchbar {
@@ -49,6 +61,10 @@ $esmerald: map-get($colors, "esmerald");
         justify-content: space-between;
         height: 50px;
         cursor: text;
+
+        &:hover {
+          box-shadow: 0 0 2px $blue;
+        }
       }
     }
 

@@ -1,7 +1,14 @@
-<div>
-  <h3>Encontre todos os personagens da série!</h3>
+<div class="container">
+  @if(!characterList){
+  <h4 class="my-4">Não existem episódios com esse personagem.</h4>
+  }@else {
+  <app-list-header
+    title="Enontre todos os personagens da série!"
+    (clearFilters)="clearFilters()"
+    [hasFilters]="isFiltered"
+  />
   <div
-    class="row no-padding-row gap-4 p0"
+    class="row no-padding-row gap-4"
     appInfiniteScroll
     (nearEnd)="loadMoreData()"
   >
@@ -11,4 +18,5 @@
     </div>
     }
   </div>
+  }
 </div>

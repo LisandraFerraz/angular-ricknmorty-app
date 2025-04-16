@@ -1,0 +1,11 @@
+<div class="d-flex flex-row justify-content-between w-100 mb-4">
+  <h3>{{ title }}</h3>
+  @if(hasFilters){
+  <button
+    (click)="clear()"
+    class="border-0 text-primary text-decoration-underline"
+  >
+    Limpar filtros
+  </button>
+  }
+</div>

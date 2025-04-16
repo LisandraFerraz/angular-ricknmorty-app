@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Pipe } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContentService } from 'app/services/content.service';
 import { EpisodesCardComponent } from 'app/shared/components/episodes-card/episodes-card.component';
@@ -9,11 +9,13 @@ import {
   filterCharStatus,
 } from 'app/shared/utils/functions/char-infos';
 import { Episode } from 'app/shared/utils/classes/episode';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-character-details',
   standalone: true,
-  imports: [EpisodesCardComponent, RouterLink],
+  imports: [EpisodesCardComponent, RouterLink, NgbPaginationModule, SlicePipe],
   templateUrl: './character-details.component.html',
   styleUrl: './character-details.component.scss',
 })
@@ -29,6 +31,9 @@ export class CharacterDetailsComponent {
   filterGender = filterCharGender;
   filterStatus = filterCharStatus;
   filterSpecies = filterCharSpecies;
+
+  page: number = 1;
+  pageSize: number = 8;
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: any) => {

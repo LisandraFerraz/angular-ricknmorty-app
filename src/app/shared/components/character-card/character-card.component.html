@@ -1,7 +1,7 @@
 <div
   (click)="goToCharPage(data.id)"
   tabindex="0"
-  class="bg-white rounded-5 custom-card position-relative"
+  class="custom-card bg-white rounded-5 position-relative shadow-sm"
 >
   <div>
     <!-- {{ data.image }}
@@ -17,7 +17,7 @@
   <span class="fw-bold pb-2">
     {{ data.name }}
   </span>
-  <img [src]="data.image" alt="" />
+  <img [src]="data.image" class="w-100" [alt]="data.name" />
   <div class="char-infos position-absolute bg-white">
     <span>
       <i [class]="filterGender(data.gender).icon"></i>

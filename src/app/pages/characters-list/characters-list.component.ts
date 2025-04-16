@@ -6,11 +6,12 @@ import { CharacterCardComponent } from 'app/shared/components/character-card/cha
 import { SearchService } from 'app/services/search.service';
 import { Subscription } from 'rxjs';
 import { InfiniteScroll } from 'app/shared/utils/directives/infinite-scroll.directive';
+import { ListHeaderComponent } from 'app/shared/components/list-header/list-header.component';
 
 @Component({
   selector: 'app-characters-list',
   standalone: true,
-  imports: [CharacterCardComponent, InfiniteScroll],
+  imports: [CharacterCardComponent, InfiniteScroll, ListHeaderComponent],
   templateUrl: './characters-list.component.html',
   styleUrl: './characters-list.component.scss',
 })
@@ -31,9 +32,10 @@ export class CharactersListComponent {
 
   ngOnInit(): void {
     this.searchService.currentQuery$.subscribe((query: any) => {
+      console.log(query);
       if (query) {
         const isFirstLoad = !this.query;
-
+        this.isFiltered = true;
         this.query = query;
 
         if (isFirstLoad || query.page === 1) {
@@ -49,7 +51,9 @@ export class CharactersListComponent {
         );
 
         if (this.query.page === 1 && !res.info.next) {
-          this.characterList = loadedCharacters;
+          this.characterList = Array.isArray(loadedCharacters)
+            ? loadedCharacters
+            : [loadedCharacters];
         } else {
           this.characterList = [...this.characterList, ...loadedCharacters];
         }
@@ -84,12 +88,15 @@ export class CharactersListComponent {
     this.query.page = page;
     this.contentService.listAllCharacters(this.query).subscribe({
       next: (res: any) => {
+        this.isFiltered = false;
         const loadedCharacters = res.results.map((item: Character) =>
           Object.assign(new Character(), item)
         );
 
         if (page === 1) {
-          this.characterList = loadedCharacters;
+          this.characterList = Array.isArray(loadedCharacters)
+            ? loadedCharacters
+            : [loadedCharacters];
         } else {
           this.characterList = [...this.characterList, ...loadedCharacters];
         }
@@ -97,10 +104,15 @@ export class CharactersListComponent {
         this.hasMorePages = !!res.info.next;
       },
       error: (error: any) => {
-        // [WIP] Adicionar melhor tratamento de erro
         console.error('Não foi possível listar os personagens.', error);
       },
     });
+  }
+
+  clearFilters() {
+    localStorage.removeItem('@characterQuery');
+    this.query = new CharacterQuery();
+    this.listCharacters(1);
   }
 
   ngOnDestroy(): void {

@@ -10,11 +10,12 @@ $colors: (
   "soft_blue": #4c6085,
   "brownish": #c1b2ab,
   "primary": #ff6600,
+  "yellow": #fcd757,
 
   "esmerald": #5abcb9,
   "aqua": #6ef9f5,
   "cyan": #00f2f2,
-  "greyish": #fff2f1,
+  "greyish": #f2f2f2,
 );
 
 @each $name, $value in $colors {
@@ -23,6 +24,16 @@ $colors: (
   }
   .bg-#{$name} {
     background-color: $value !important;
+  }
+  .btn-#{$name} {
+    background-color: $value !important;
+    color: map-get($map: $colors, $key: "white");
+    transition: ease-out 0.2s;
+
+    &:hover {
+      opacity: 80%;
+      color: map-get($map: $colors, $key: "white");
+    }
   }
   .text-bg-#{$name} {
     background-color: $value !important;
@@ -51,5 +62,36 @@ $text_xl: 2rem;
   > [class*="col"] {
     padding-left: 0;
     padding-right: 0;
+  }
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+ngb-pagination {
+  .pagination {
+    gap: 9px;
+  }
+  li.page-item {
+    border-radius: 12px !important;
+  }
+  .page-link:focus {
+    box-shadow: none !important;
+  }
+  .page-link.active,
+  .active > .page-link {
+    background-color: map-get($map: $colors, $key: "blue") !important;
+    border-radius: 4px;
+  }
+
+  .page-link,
+  .active > .page-link {
+    color: map-get($map: $colors, $key: "space") !important;
+  }
+
+  li.active > .page-link {
+    color: map-get($map: $colors, $key: "white") !important;
   }
 }

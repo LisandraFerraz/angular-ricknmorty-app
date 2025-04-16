@@ -1,7 +1,8 @@
 <div class="content-wrapper">
   <div class="sidebar position-fixed">
-    <div class="sidebar_header">
-      <img src="" alt="" />
+    <div class="sidebar_header py-4">
+      <img [src]="randomIcon.icon" alt="" />
+      <h6>{{ randomIcon.title }}</h6>
     </div>
     <div class="sidebar_list">
       <ul>
@@ -15,13 +16,13 @@
   </div>
   <div class="content-group">
     @if(hideHeader()){
-    <div class="header">
+    <div class="overflow-hidden text-center position-relative mt-3">
       <div class="input-group p-3">
         <div
           (click)="openModal()"
           class="form-control fake-searchbar rounded-5 px-4"
         >
-          <span>"Buscar..."</span>
+          <span>Buscar...</span>
           <i class="bi bi-search"></i>
         </div>
       </div>

@@ -1,8 +1,12 @@
 <div class="container">
-  <div class="go_back">
-    <a [routerLink]="['/characters']">Voltar aos personagens</a>
+  <div class="go_back mb-4">
+    <a [routerLink]="['/characters']">
+      <i class="bi bi-chevron-left"></i>
+      Voltar aos personagens</a
+    >
   </div>
-  <div class="profile">
+
+  <div class="profile bg-white p-4 rounded-4">
     <img [src]="charData.image" [alt]="charData.name" />
     <div>
       <h2>{{ charData.name }}</h2>
@@ -22,15 +26,29 @@
       </div>
     </div>
   </div>
-  <div class="episodes-grid row no-padding-row gap-2">
+
+  <div class="episodes-grid gap-2">
     @if(!episodesData){
     <h4 class="my-4">Não existem episódios com esse personagem.</h4>
     } @else {
-    <h4 class="my-4">Episódios</h4>
-    @for(ep of episodesData; track ep.id){
-    <div class="col-auto">
-      <app-episodes-card [episode]="ep" />
+    <h4 class="my-4">Aparece em:</h4>
+    <div class="row no-padding-row">
+      @for(ep of episodesData | slice: (page-1) * pageSize : page * pageSize;
+      track ep){
+      <div class="col-auto">
+        <app-episodes-card [episode]="ep" />
+      </div>
+      }
     </div>
-    } }
+    <div class="d-flex justify-content-end mt-4">
+      <ngb-pagination
+        class="m-0 p-0"
+        [pageSize]="pageSize"
+        [collectionSize]="episodesData.length"
+        [(page)]="page"
+        aria-label="Default pagination"
+      ></ngb-pagination>
+    </div>
+    }
   </div>
 </div>

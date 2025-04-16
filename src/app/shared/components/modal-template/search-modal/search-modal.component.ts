@@ -2,10 +2,6 @@ import { Component } from '@angular/core';
 import { ModalTemplateComponent } from '../modal-template.component';
 import { CharacterQuery, EpisodeQuery } from 'app/shared/utils/classes/queries';
 import { SearchService } from 'app/services/search.service';
-import {
-  CharacterGenders,
-  CharacterStatus,
-} from 'app/shared/utils/classes/character';
 import { FormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';

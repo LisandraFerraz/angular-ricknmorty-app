@@ -7,6 +7,6 @@
   @if(checkSearchType()){
   <app-search-character [query]="searchQuery" />
   } @else {
-  <app-search-episode />
+  <app-search-episode [query]="searchQuery" />
   }
 </app-modal-template>
