@@ -18,7 +18,6 @@ import { ICharacterRes } from 'app/shared/utils/interfaces/characters-res';
 })
 export class CharactersListComponent implements OnDestroy, OnInit {
   private sub!: Subscription;
-  private limitSignal = signal<number>(30);
 
   constructor(
     private contentService: ContentService,

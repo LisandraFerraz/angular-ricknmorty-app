@@ -4,6 +4,7 @@ $white: map-get($colors, "white");
 $greyish: map-get($colors, "greyish");
 $darker_space: map-get($colors, "darker_space");
 $blue: map-get($colors, "blue");
+$yellow: map-get($colors, "yellow");
 
 .content-wrapper {
   display: flex;
@@ -40,10 +41,15 @@ $blue: map-get($colors, "blue");
       }
       .active-route {
         color: $darker_space;
-        border-right: 5px solid $blue;
         > a {
           color: $blue;
         }
+      }
+      .blue-border {
+        border-right: 5px solid $blue;
+      }
+      .yellow-border {
+        border-right: 5px solid $yellow;
       }
     }
   }

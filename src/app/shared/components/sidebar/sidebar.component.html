@@ -1,13 +1,17 @@
 <div class="content-wrapper">
   <div class="sidebar position-fixed">
     <div class="sidebar_header py-4">
-      <img [src]="randomIcon.icon" alt="" />
-      <h6>{{ randomIcon.title }}</h6>
+      <img [src]="charState.activeIcon()" alt="" />
+      <h6>{{ charState.activeName() }}</h6>
     </div>
     <div class="sidebar_list">
       <ul>
         @for (nav of navList; track nav.id) {
-        <li [class]="isRouteActive(nav.path) ? 'active-route' : ''">
+        <li
+          [class]="
+            isRouteActive(nav.path) ? charState.activeColor() + '-border' : ''
+          "
+        >
           <a [routerLink]="nav.path">{{ nav.label }}</a>
         </li>
         }

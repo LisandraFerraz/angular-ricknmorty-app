@@ -3,6 +3,7 @@ import { sidebarContent } from '../../data/sidebar-content';
 import { Router, RouterModule } from '@angular/router';
 import { SearchModalComponent } from '../modal-template/search-modal/search-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CharacterStateService } from 'app/services/character-state.service';
 
 interface IHeaderConfig {
   title: string;
@@ -16,15 +17,20 @@ interface IHeaderConfig {
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent implements OnInit {
-  constructor(private route: Router, private modalService: NgbModal) {}
+  constructor(
+    private route: Router,
+    private modalService: NgbModal,
+    public charState: CharacterStateService
+  ) {
+    this.charState.setActiveChar();
+  }
 
   navList = sidebarContent;
 
+  activeColor: string = '';
   randomIcon: IHeaderConfig = { title: '', icon: '' };
 
-  ngOnInit(): void {
-    this.randomIcon = this.getRandomIcon();
-  }
+  ngOnInit(): void {}
 
   isRouteActive(route: string) {
     return route === this.route.url;
@@ -33,16 +39,6 @@ export class SidebarComponent implements OnInit {
   hideHeader(): boolean {
     const hasRoutes = ['/characters', '/episodes'];
     return hasRoutes.includes(this.route.url);
-  }
-
-  getRandomIcon(): any {
-    const iconsArray = [
-      { title: 'Mortypédia', icon: 'morty-icon.png' },
-      { title: 'Rickypédia', icon: 'rick-icon.png' },
-    ];
-    const random = Math.floor(Math.random() * iconsArray.length);
-
-    return iconsArray[random];
   }
 
   openModal() {
