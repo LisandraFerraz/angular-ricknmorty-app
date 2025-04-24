@@ -23,3 +23,7 @@ app-root {
   height: 100% !important;
   height: 100%;
 }
+
+.bi-heart-fill {
+  color: map-get($colors, "red");
+}

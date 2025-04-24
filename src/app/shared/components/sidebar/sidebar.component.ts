@@ -3,7 +3,7 @@ import { sidebarContent } from '../../data/sidebar-content';
 import { Router, RouterModule } from '@angular/router';
 import { SearchModalComponent } from '../modal-template/search-modal/search-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CharacterStateService } from 'app/services/character-state.service';
+import { CharactersService } from 'app/services/characters.service';
 
 interface IHeaderConfig {
   title: string;
@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
   constructor(
     private route: Router,
     private modalService: NgbModal,
-    public charState: CharacterStateService
+    public charState: CharactersService
   ) {
     this.charState.setActiveChar();
   }

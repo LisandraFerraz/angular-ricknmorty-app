@@ -11,6 +11,7 @@ export class Character {
   url: string = '';
   image: string = '';
   created: string = '';
+  favorite: boolean = false;
 }
 
 export enum CharacterGenders {

@@ -11,6 +11,7 @@ import {
 import { Episode } from 'app/shared/utils/classes/episode';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { SlicePipe } from '@angular/common';
+import { CharactersService } from 'app/services/characters.service';
 
 @Component({
   selector: 'app-character-details',
@@ -22,7 +23,8 @@ import { SlicePipe } from '@angular/common';
 export class CharacterDetailsComponent {
   constructor(
     private route: ActivatedRoute,
-    private contentService: ContentService
+    private contentService: ContentService,
+    private charService: CharactersService
   ) {}
 
   charData: Character = new Character();
@@ -44,10 +46,19 @@ export class CharacterDetailsComponent {
     });
   }
 
+  saveCharacter(charData: Character) {
+    console.log(charData);
+    charData.favorite = !charData.favorite;
+    this.charService.saveCharacter(charData);
+  }
+
   getCharacterDetails(id: number) {
     this.contentService.listCharacter(id).subscribe({
       next: (res) => {
-        this.charData = res;
+        const savedChars = this.charService.getSavedChars();
+        const isFavorite = savedChars.find((char) => res.id === char.id);
+
+        this.charData = isFavorite?.favorite ? isFavorite : res;
         this.getEpisodes();
       },
       error: (err) => {

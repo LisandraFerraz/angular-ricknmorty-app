@@ -9,14 +9,32 @@
     border-radius: 100%;
   }
 
-  div > .profile-details {
-    font-size: 1.2rem;
-
-    > div {
+  div {
+    :first-child {
+      display: flex;
       align-items: center;
+      gap: 10px;
+      button {
+        background-color: transparent;
+        font-size: large;
+        border: none;
+        transition: ease-in 0.2s;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
     }
-    i {
-      font-size: 1.5rem;
+
+    > .profile-details {
+      font-size: 1.2rem;
+
+      > div {
+        align-items: center;
+      }
+      i {
+        font-size: 1.5rem;
+      }
     }
   }
 }

@@ -42,6 +42,11 @@ $white: map-get($colors, "white");
       background-color: transparent;
       font-size: 1.2rem;
       opacity: 60%;
+      transition: ease-in 0.2s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
 
     &::before {

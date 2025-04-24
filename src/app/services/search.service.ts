@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CoreApiService } from 'app/core/core-api.service';
 import { endpoints } from 'app/core/endpoints';
 import { CharacterQuery, EpisodeQuery } from 'app/shared/utils/classes/queries';
-import { BehaviorSubject, Subject, throwError } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

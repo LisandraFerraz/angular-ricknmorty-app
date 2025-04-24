@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { InfiniteScroll } from 'app/shared/utils/directives/infinite-scroll.directive';
 import { ListHeaderComponent } from 'app/shared/components/list-header/list-header.component';
 import { ICharacterRes } from 'app/shared/utils/interfaces/characters-res';
+import { CharactersService } from 'app/services/characters.service';
 
 @Component({
   selector: 'app-characters-list',
@@ -21,7 +22,8 @@ export class CharactersListComponent implements OnDestroy, OnInit {
 
   constructor(
     private contentService: ContentService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private charService: CharactersService
   ) {}
 
   query = new CharacterQuery();
@@ -48,13 +50,12 @@ export class CharactersListComponent implements OnDestroy, OnInit {
         const loadedCharacters = res.results?.map((char: Character) =>
           Object.assign(new Character(), char)
         );
+        const filtered = this.filterFavorites(loadedCharacters);
 
         if (this.query.page === 1 && !res.info?.next) {
-          this.characterList = Array.isArray(loadedCharacters)
-            ? loadedCharacters
-            : [loadedCharacters];
+          this.characterList = Array.isArray(filtered) ? filtered : [filtered];
         } else {
-          this.characterList = [...this.characterList, ...loadedCharacters];
+          this.characterList = [...this.characterList, ...filtered];
         }
 
         this.hasMorePages = !!res.info?.next;
@@ -93,12 +94,12 @@ export class CharactersListComponent implements OnDestroy, OnInit {
           Object.assign(new Character(), item)
         );
 
+        const filtered = this.filterFavorites(loadedCharacters);
+
         if (page === 1) {
-          this.characterList = Array.isArray(loadedCharacters)
-            ? loadedCharacters
-            : [loadedCharacters];
+          this.characterList = Array.isArray(filtered) ? filtered : [filtered];
         } else {
-          this.characterList = [...this.characterList, ...loadedCharacters];
+          this.characterList = [...this.characterList, ...filtered];
         }
 
         this.hasMorePages = !!res.info.next;
@@ -107,6 +108,20 @@ export class CharactersListComponent implements OnDestroy, OnInit {
         this.characterList = [];
       },
     });
+  }
+
+  filterFavorites(charData: Character[]): Character[] {
+    const favoriteChars = this.charService.getSavedChars();
+
+    const favMap = new Map(favoriteChars.map((char) => [char.id, char]));
+
+    const filteredCharacters = charData?.map((char) => {
+      return favMap.has(char.id)
+        ? favMap.get(char.id)!
+        : { ...char, favorite: false };
+    });
+
+    return filteredCharacters;
   }
 
   clearFilters() {

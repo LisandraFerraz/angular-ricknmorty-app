@@ -1,24 +1,22 @@
-<div class="container">
-  <app-list-header
-    [title]="
-      !characterList.length
-        ? 'Não existem episódios com esse personagem.'
-        : 'Enontre todos os personagens da série!'
-    "
-    (clearFilters)="clearFilters()"
-    [hasFilters]="isFiltered"
-  />
-  @if(characterList.length){
-  <div
-    class="row no-padding-row gap-4"
-    appInfiniteScroll
-    (nearEnd)="loadMoreData()"
-  >
-    @for(char of characterList; track char.id){
-    <div class="col-auto">
-      <app-character-card [data]="char" />
-    </div>
-    }
+<app-list-header
+  [title]="
+    !characterList.length
+      ? 'Não existem episódios com esse personagem.'
+      : 'Enontre todos os personagens da série!'
+  "
+  (clearFilters)="clearFilters()"
+  [hasFilters]="isFiltered"
+/>
+@if(characterList.length){
+<div
+  class="row no-padding-row gap-4"
+  appInfiniteScroll
+  (nearEnd)="loadMoreData()"
+>
+  @for(char of characterList; track char.id){
+  <div class="col-auto">
+    <app-character-card [data]="char" />
   </div>
   }
 </div>
+}

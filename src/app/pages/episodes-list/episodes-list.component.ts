@@ -42,6 +42,7 @@ export class EpisodesListComponent implements OnDestroy {
   };
 
   ngOnInit(): void {
+    // verifica se foi realizada uma filtragem
     this.searchService.currentEpQuery$.subscribe((query: any) => {
       if (query) {
         this.isFiltered = true;
@@ -55,6 +56,7 @@ export class EpisodesListComponent implements OnDestroy {
       }
     });
 
+    // resgata o resultado do filtro
     this.sub = this.searchService.searchResult.subscribe({
       next: (res: any) => {
         this.pageInfo = res?.info;
