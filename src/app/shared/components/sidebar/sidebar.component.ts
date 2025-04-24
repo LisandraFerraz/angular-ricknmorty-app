@@ -27,6 +27,7 @@ export class SidebarComponent implements OnInit {
 
   navList = sidebarContent;
 
+  isShow: boolean = false;
   activeColor: string = '';
   randomIcon: IHeaderConfig = { title: '', icon: '' };
 
@@ -34,6 +35,10 @@ export class SidebarComponent implements OnInit {
 
   isRouteActive(route: string) {
     return route === this.route.url;
+  }
+
+  toggleMenu() {
+    this.isShow = !this.isShow;
   }
 
   hideHeader(): boolean {
@@ -44,6 +49,7 @@ export class SidebarComponent implements OnInit {
   openModal() {
     this.modalService.open(SearchModalComponent, {
       animation: true,
+      centered: true,
       size: 'lg',
     });
   }

@@ -31,6 +31,7 @@ export class EpisodesCardComponent {
 
     const modalRef = this.modalService.open(EpisodeDetailsModalComponent, {
       animation: true,
+      centered: true,
       size: 'lg',
     });
 

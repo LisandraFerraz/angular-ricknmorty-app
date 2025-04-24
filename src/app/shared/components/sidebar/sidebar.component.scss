@@ -5,6 +5,7 @@ $greyish: map-get($colors, "greyish");
 $darker_space: map-get($colors, "darker_space");
 $blue: map-get($colors, "blue");
 $yellow: map-get($colors, "yellow");
+$yellow: map-get($colors, "yellow");
 
 .content-wrapper {
   display: flex;
@@ -52,6 +53,11 @@ $yellow: map-get($colors, "yellow");
         border-right: 5px solid $yellow;
       }
     }
+    @media screen and (max-width: 768px) {
+      position: absolute;
+      z-index: 10;
+      height: 100%;
+    }
   }
   .content-group {
     background-color: $greyish;
@@ -59,6 +65,14 @@ $yellow: map-get($colors, "yellow");
     margin-left: 240px;
     border-top-left-radius: 35px;
     border-bottom-left-radius: 35px;
+
+    .burguer-menu {
+      display: none;
+      @media screen and (max-width: 768px) {
+        display: block;
+        font-size: $text_lg;
+      }
+    }
 
     .input-group {
       .fake-searchbar {
@@ -77,5 +91,18 @@ $yellow: map-get($colors, "yellow");
     .content {
       padding: 25px;
     }
+
+    @media screen and (max-width: 768px) {
+      margin-left: 0;
+    }
   }
+}
+.hide {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
+}
+.show {
+  display: block;
 }

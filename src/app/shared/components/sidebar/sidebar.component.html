@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-  <div class="sidebar position-fixed">
+  <div [class]="(isShow ? 'show ' : 'hide ') + 'sidebar position-fixed'">
     <div class="sidebar_header py-4">
       <img [src]="charState.activeIcon()" alt="" />
       <h6>{{ charState.activeName() }}</h6>
@@ -18,9 +18,12 @@
       </ul>
     </div>
   </div>
+
   <div class="content-group">
-    @if(hideHeader()){
-    <div class="overflow-hidden text-center position-relative mt-3">
+    <div
+      class="overflow-hidden d-flex align-items-center justify-content-end position-relative mt-3 d-flex"
+    >
+      @if(hideHeader()){
       <div class="input-group p-3">
         <div
           (click)="openModal()"
@@ -30,8 +33,14 @@
           <i class="bi bi-search"></i>
         </div>
       </div>
+      }
+      <button
+        (click)="toggleMenu()"
+        class="burguer-menu p-2 border-0 bg-transparent"
+      >
+        <i class="bi bi-list"></i>
+      </button>
     </div>
-    }
     <div class="content">
       <ng-content />
     </div>

@@ -37,4 +37,11 @@
       }
     }
   }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    > div > :first-child {
+      justify-content: center;
+    }
+  }
 }
